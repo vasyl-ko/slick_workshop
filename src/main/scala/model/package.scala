@@ -12,4 +12,6 @@ package object model {
     MappedColumnType.base[Duration, Long](
       (d: Duration) => d.toSeconds,
       (l: Long) => FiniteDuration(l, TimeUnit.SECONDS))
+
+
 }
