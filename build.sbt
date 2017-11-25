@@ -18,6 +18,9 @@ val repositories = Project("repositories", file("repositories"))
     )
   )
 
-val root = Project("slick_workshop", file("."))
-  .settings(globalSettings: _*)
+val application = Project("application", file("application"))
   .dependsOn(repositories)
+  .settings(globalSettings: _*)
+
+val root = Project("slick_workshop", file("."))
+    .aggregate(application)
