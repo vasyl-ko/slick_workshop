@@ -1,5 +1,3 @@
-
-
 import model._
 import slick.jdbc.PostgresProfile.api._
 import slick.lifted.Tag
