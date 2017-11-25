@@ -1,12 +1,12 @@
-package model
 
-import slick.lifted.Tag
+
+import model._
 import slick.jdbc.PostgresProfile.api._
+import slick.lifted.Tag
 
 import scala.concurrent.Future
 
 
-case class Country(id: Option[Long], title: String)
 
 class CountryTable(tag: Tag) extends Table[Country](tag, "countries") {
   val id = column[Long]("id", O.PrimaryKey, O.AutoInc)

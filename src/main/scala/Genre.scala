@@ -1,11 +1,11 @@
-package model
 
-import slick.lifted.Tag
+
+import model._
 import slick.jdbc.PostgresProfile.api._
+import slick.lifted.Tag
 
 import scala.concurrent.Future
 
-case class Genre(id: Option[Long], title: String, description: Option[String])
 
 class GenreTable(tag: Tag) extends Table[Genre](tag, "genres") {
   val id = column[Long]("id", O.PrimaryKey, O.AutoInc)

@@ -1,11 +1,9 @@
-package model
-
-import slick.lifted.Tag
+import model._
 import slick.jdbc.PostgresProfile.api._
+import slick.lifted.Tag
 
 import scala.concurrent.Future
 
-case class Staff(id: Option[Long], name: String, rate: Double, age: Int)
 
 class StaffTable(tag: Tag) extends Table[Staff](tag, "staff") {
   val id = column[Long]("id", O.PrimaryKey, O.AutoInc)

@@ -1,14 +1,11 @@
-package model
-
-import slick.lifted.Tag
+import model._
 import slick.jdbc.PostgresProfile.api._
+import slick.lifted.Tag
+import implicits._
 
+import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 import scala.concurrent.duration.Duration
-import scala.concurrent.ExecutionContext.Implicits.global
-
-case class Film(id: Option[Long], title: String, duration: Duration,
-                directorId: Long, rating: Double)
 
 class FilmTable(tag: Tag) extends Table[Film](tag, "films") {
   val id = column[Long]("id", O.PrimaryKey, O.AutoInc)
@@ -67,7 +64,6 @@ class FilmRepository(db: Database) {
 }
 
 
-case class FilmToGenre(id: Option[Long], filmId: Long, genreId: Long)
 
 class FilmToGenreTable(tag: Tag) extends Table[FilmToGenre](tag, "film_to_genre") {
   val id = column[Long]("id", O.PrimaryKey, O.AutoInc)
@@ -84,7 +80,6 @@ object FilmToGenreTable {
   val table = TableQuery[FilmToGenreTable]
 }
 
-case class FilmToCast(id: Option[Long], filmId: Long, staffId: Long)
 
 class FilmToCastTable(tag: Tag) extends Table[FilmToCast](tag, "film_to_cast") {
   val id = column[Long]("id", O.PrimaryKey, O.AutoInc)
@@ -101,7 +96,6 @@ object FilmToCastTable {
   val table = TableQuery[FilmToCastTable]
 }
 
-case class FilmToCountry(id: Option[Long], filmId: Long, countryId: Long)
 
 class FilmToCountryTable(tag: Tag) extends Table[FilmToCountry](tag, "film_to_country") {
   val id = column[Long]("id", O.PrimaryKey, O.AutoInc)
