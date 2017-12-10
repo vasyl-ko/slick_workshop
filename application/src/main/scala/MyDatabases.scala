@@ -1,24 +1,24 @@
-//import model._
-//import slick.jdbc.PostgresProfile.api._
-//
-//import scala.concurrent.Await
-//import scala.concurrent.duration._
-//
-//object Main {
-//  val db = Database.forURL(
-//    "jdbc:postgresql://127.0.0.1/filmoteka?user=postgres&password=root"
-//  )
-//
+import model._
+import slick.jdbc.PostgresProfile.api._
+
+import scala.concurrent.Await
+import scala.concurrent.duration._
+
+trait MyDatabases {
+  val db = Database.forURL(
+    "jdbc:postgresql://127.0.0.1/filmoteka?user=postgres&password=root"
+  )
+
 //  val countryRepository = new CountryRepository(db)
 //  val genreRepository = new GenreRepository(db)
 //  val staffRepository = new StaffRepository(db)
-//  val filmRepository = new FilmRepository(db)
-//
+  val filmRepository = new FilmRepository(db)
+
 //  def main(args: Array[String]): Unit = {
 ////    init()
 //    databaseFill()
 //  }
-//
+
 //  def init(): Unit = {
 //    Await.result(db.run(CountryTable.table.schema.create), Duration.Inf)
 //    Await.result(db.run(StaffTable.table.schema.create), Duration.Inf)
@@ -28,7 +28,7 @@
 //    Await.result(db.run(FilmToCastTable.table.schema.create), Duration.Inf)
 //    Await.result(db.run(FilmToCountryTable.table.schema.create), Duration.Inf)
 //  }
-//
+
 //  def databaseFill(): Unit = {
 //    for (i <- 1 to 5) {
 //      Await.result(countryRepository.create(Country(Some(i), s"Country #$i")), Duration.Inf)
@@ -48,4 +48,4 @@
 //      ), Duration.Inf)
 //    }
 //  }
-//}
+}

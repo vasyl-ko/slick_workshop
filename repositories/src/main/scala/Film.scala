@@ -55,6 +55,12 @@ class FilmRepository(db: Database) {
     db.run(query)
   }
 
+  def delete(filmId: Long): Future[Int] =
+    db.run(FilmTable.table.filter(_.id === filmId).delete)
+
+  def update(film: Film): Future[Int] =
+    db.run(FilmTable.table.filter(_.id === film.id).update(film))
+
   def getFilmWithDirector(filmId: Long): Future[(Film, Staff)] = {
     val query = FilmTable.table join StaffTable.table on (_.directorId === _.id)
     db.run(

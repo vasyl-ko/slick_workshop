@@ -1,6 +1,10 @@
+import akka.http.scaladsl.model.StatusCodes
 import akka.http.scaladsl.server.Directives._
+import de.heikoseeberger.akkahttpcirce.FailFastCirceSupport
+import io.circe.syntax._
+import model.Film
 
-trait ApiRoute {
+trait ApiRoute extends MyDatabases with FailFastCirceSupport{
   val routes =
     pathSingleSlash {
       complete("hello")
@@ -17,18 +21,22 @@ trait ApiRoute {
               complete("film added")
             }
           } ~
-          pathPrefix(Segment) { id =>
+          pathPrefix(LongNumber) { id =>
             get {
               pathSingleSlash {
-                complete(s"here your film with id: $id")
+                onSuccess(filmRepository.getById(id.toLong)) {
+                  (result, _, _, _) => complete(result.asJson)
+                }
               }
             } ~
             post {
                 path("delete") {
-                  complete(s"film with id: $id was deleted")
+                  onSuccess(filmRepository.delete(id.toLong)) {
+                    result => complete(StatusCodes.OK)
+                  }
                 } ~
-                path("edit") {
-                  complete(s"film with id: $id was edited")
+                pathPrefix("edit" ) {
+                  complete("")
                 }
             }
           }

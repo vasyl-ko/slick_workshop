@@ -1,6 +1,12 @@
 import scala.concurrent.duration.Duration
+import io.circe._
+import io.circe.generic.JsonCodec
+import io.circe.generic.auto._
+import io.circe.parser._
+import io.circe.syntax._
 
 package object model {
+  @JsonCodec
   case class Film(id: Option[Long], title: String, duration: Duration,
                   directorId: Long, rating: Double)
 
@@ -16,4 +22,12 @@ package object model {
 
   case class Country(id: Option[Long], title: String)
 
+
+  implicit val durationEncoder = new Encoder[Duration] {
+    override def apply(a: Duration):Json = Json.fromLong(a.toSeconds)
+  }
+
+  implicit val durationDecoder = new Decoder[Json] {
+    override def apply(c: HCursor) = 
+  }
 }
